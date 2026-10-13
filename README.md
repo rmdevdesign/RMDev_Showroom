@@ -72,6 +72,6 @@ Les teintes et dimensions sont indicatives. Le modèle est un concept visuel et 
 
 ## Ressources
 
-- Instrument Sans et Instrument Serif, stockées localement sous licence SIL Open Font License ; licences dans `src/assets/fonts/`.
+- Barlow Condensed (logo et titre du produit) et IBM Plex Sans (interface et cotes), stockées localement sous licence SIL Open Font License ; licences dans `src/assets/fonts/`.
 - Texture [Wood049 / ambientCG](https://ambientcg.com/view?id=Wood049), sous licence CC0 ; provenance dans `src/assets/wood/README.md`. Les rendus chêne, noyer et bois blanc partagent une base de grain avec des transformations de couleur distinctes.
 - Géométrie et pictogrammes définis en code. Aucun modèle GLB, logo, police ou image du projet client d’origine n’est inclus.

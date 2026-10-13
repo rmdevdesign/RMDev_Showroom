@@ -248,7 +248,7 @@ function FramedControls({
       : new Vector3(2.2, 1.05, 3).normalize();
     const distance = initialized.current
       ? camera.position.distanceTo(orbit.target)
-      : minDistance * 1.15;
+      : minDistance;
     orbit.target.set(0, height / 200, 0.015);
     camera.position.copy(
       direction
@@ -330,7 +330,7 @@ export default function Scene({
           </div>
         }
       >
-        <color attach="background" args={["#e9e6e1"]} />
+        <color attach="background" args={["#eeece7"]} />
         <ambientLight intensity={0.65} />
         <hemisphereLight args={["#fffaf2", "#c5c7c9", 1.2]} />
         <directionalLight

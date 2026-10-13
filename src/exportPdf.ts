@@ -10,9 +10,9 @@ import {
 } from "./config";
 import { cabinetPanels } from "./cabinetGeometry";
 import { woodAppearance, woodColorUrl } from "./woodAppearance";
-import regularUrl from "./assets/fonts/InstrumentSans-Regular.ttf?url";
-import semiboldUrl from "./assets/fonts/InstrumentSans-Semibold.ttf?url";
-import serifUrl from "./assets/fonts/InstrumentSerif.ttf?url";
+import regularUrl from "./assets/fonts/IBMPlexSans-Regular.ttf?url";
+import semiboldUrl from "./assets/fonts/IBMPlexSans-Medium.ttf?url";
+import serifUrl from "./assets/fonts/BarlowCondensed-SemiBold.ttf?url";
 
 const INK = "#292723",
   MUTED = "#76716a",
@@ -61,7 +61,7 @@ function type(
   face: "sans" | "serif" | "bold" = "sans",
 ) {
   doc.setFont(
-    face === "serif" ? "InstrumentSerif" : "InstrumentSans",
+    face === "serif" ? "BarlowCondensed" : "PlexSans",
     face === "bold" ? "bold" : "normal",
   );
   doc.setFontSize(size);
@@ -279,9 +279,9 @@ export async function createConfigurationPdf(
     putOnlyUsedFonts: true,
   });
   [
-    ["InstrumentSans-Regular.ttf", "InstrumentSans", "normal"],
-    ["InstrumentSans-Semibold.ttf", "InstrumentSans", "bold"],
-    ["InstrumentSerif.ttf", "InstrumentSerif", "normal"],
+    ["IBMPlexSans-Regular.ttf", "PlexSans", "normal"],
+    ["IBMPlexSans-Medium.ttf", "PlexSans", "bold"],
+    ["BarlowCondensed-SemiBold.ttf", "BarlowCondensed", "normal"],
   ].forEach(([file, family, style], i) => {
     doc.addFileToVFS(file, fonts[i]);
     doc.addFont(file, family, style);

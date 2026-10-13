@@ -1,24 +1,38 @@
+/* Local fonts */
 @font-face {
-  font-family: Instrument;
-  src: url("./assets/fonts/InstrumentSans.ttf") format("truetype");
-  font-weight: 400 700;
-  font-display: swap;
-}
-@font-face {
-  font-family: InstrumentSerif;
-  src: url("./assets/fonts/InstrumentSerif.ttf") format("truetype");
+  font-family: Plex;
+  src: url("./assets/fonts/IBMPlexSans-Regular.ttf") format("truetype");
   font-weight: 400;
   font-display: swap;
 }
+@font-face {
+  font-family: Plex;
+  src: url("./assets/fonts/IBMPlexSans-Medium.ttf") format("truetype");
+  font-weight: 500 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: BarlowCondensed;
+  src: url("./assets/fonts/BarlowCondensed-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-display: swap;
+}
+/* Design tokens and base elements */
 :root {
-  font-family: Instrument, Arial, sans-serif;
+  --font-body: Plex, Arial, sans-serif;
+  --font-display: BarlowCondensed, "Arial Narrow", sans-serif;
+  --paper: #f8f6f2;
+  --stage: #eeece7;
+  --layout-width: 1680px;
+  --gutter: clamp(28px, 3vw, 48px);
+  font-family: var(--font-body);
   font-size: 16px;
   color: #292723;
-  background: #f8f6f2;
+  background: var(--paper);
   font-synthesis: none;
   --ink: #292723;
-  --muted: #76716a;
-  --line: #ded9d0;
+  --muted: #68645e;
+  --line: #d5d0c8;
   --accent: #703f35;
 }
 * {
@@ -58,19 +72,26 @@ button:disabled {
   height: 22px;
   flex-shrink: 0;
 }
+/* The shared frame keeps the product and controls together on wide screens. */
+.app {
+  max-width: var(--layout-width);
+  margin-inline: auto;
+}
+/* Header */
 header {
-  height: 88px;
+  height: 80px;
   display: flex;
   align-items: center;
   gap: 42px;
-  padding: 0 42px;
+  padding: 0 var(--gutter);
   border-bottom: 1px solid var(--line);
-  background: #f8f6f2;
+  background: var(--paper);
 }
 .wordmark {
-  font-size: 36px;
+  font-family: var(--font-display);
+  font-size: 42px;
   font-weight: 600;
-  letter-spacing: -2px;
+  letter-spacing: -0.8px;
 }
 .wordmark span {
   color: var(--accent);
@@ -95,53 +116,54 @@ header {
   width: 18px;
   height: 18px;
 }
+/* Showroom and 3D stage */
 main {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 460px;
-  height: calc(100svh - 142px);
-  min-height: 740px;
+  grid-template-columns: minmax(0, 1fr) clamp(420px, 32vw, 500px);
+  min-height: max(720px, calc(100svh - 134px));
 }
 .stage {
   position: relative;
   overflow: hidden;
-  background: #e9e6e1;
+  background: var(--stage);
 }
 .stage-heading {
   position: absolute;
-  top: 37px;
-  left: 44px;
+  top: 36px;
+  left: var(--gutter);
   z-index: 1;
   pointer-events: none;
 }
 .eyebrow {
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 1.8px;
+  letter-spacing: 0.8px;
 }
 .stage-heading h1 {
-  font-family: InstrumentSerif, Georgia, serif;
-  font-weight: 400;
-  font-size: 72px;
-  letter-spacing: -2px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(52px, 4vw, 64px);
+  text-transform: uppercase;
+  letter-spacing: -0.6px;
   line-height: 1;
-  margin: 17px 0 14px;
+  margin: 12px 0 10px;
 }
 .stage-heading h1 > span {
   color: var(--accent);
 }
 .stage-heading p {
   font-size: 16px;
-  color: #787269;
+  color: var(--muted);
   margin: 0;
 }
 .scene {
   position: absolute;
-  inset: 125px 0 100px;
+  inset: 130px 0 150px;
 }
 .scene-badge {
   position: absolute;
-  top: 41px;
-  right: 38px;
+  top: 39px;
+  right: var(--gutter);
   font-size: 13px;
   letter-spacing: 1px;
   border-bottom: 1px solid #aca69b;
@@ -150,16 +172,19 @@ main {
 }
 .stage-bottom {
   position: absolute;
-  bottom: 56px;
-  left: 44px;
-  right: 38px;
+  bottom: 95px;
+  left: 50%;
+  width: min(520px, calc(100% - 2 * var(--gutter)));
+  transform: translateX(-50%);
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
 }
 .stage-bottom strong {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 400;
   letter-spacing: -0.5px;
   font-variant-numeric: tabular-nums;
@@ -170,7 +195,7 @@ main {
 }
 .stage-bottom div > span {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--muted);
   margin-top: 7px;
 }
@@ -200,18 +225,22 @@ main {
 }
 .gesture {
   position: absolute;
-  bottom: 15px;
-  left: 44px;
-  font-size: 12px;
-  color: #837d72;
+  bottom: 55px;
+  left: 50%;
+  width: min(520px, calc(100% - 2 * var(--gutter)));
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
 }
+/* Configuration panel */
 aside {
   display: flex;
   flex-direction: column;
   min-height: 0;
-  overflow: hidden;
-  background: #f8f6f2;
-  padding: 37px 32px 18px;
+  overflow: visible;
+  background: var(--paper);
+  padding: 36px 36px 24px;
   border-left: 1px solid var(--line);
 }
 .panel-intro {
@@ -221,11 +250,11 @@ aside {
   color: var(--accent);
 }
 .panel-intro h2 {
-  font-family: InstrumentSerif, Georgia, serif;
-  font-size: 42px;
-  font-weight: 400;
-  letter-spacing: -0.5px;
-  line-height: 1.05;
+  font-family: var(--font-body);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.2;
   margin: 13px 0 12px;
 }
 .panel-intro p {
@@ -266,13 +295,10 @@ nav button.active {
 nav button.active span {
   color: var(--accent);
 }
+/* Configuration controls */
 .options {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
+  flex-shrink: 0;
   padding: 28px 3px 22px;
-  scrollbar-width: thin;
-  scrollbar-color: #c8bfb1 transparent;
 }
 .section-label {
   display: flex;
@@ -288,6 +314,7 @@ nav button.active span {
   margin: 0;
 }
 .section-label > span {
+  font-variant-numeric: tabular-nums;
   font-size: 14px;
   color: var(--muted);
 }
@@ -360,7 +387,7 @@ nav button.active span {
   color: #fff;
 }
 .hint {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.7;
   color: var(--muted);
   margin: 22px 0 0;
@@ -373,6 +400,10 @@ nav button.active span {
   margin-bottom: 28px;
 }
 .swatches button {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
   border: 0;
   background: none;
   padding: 0;
@@ -381,6 +412,7 @@ nav button.active span {
   line-height: 1.3;
 }
 .swatches i {
+  flex-shrink: 0;
   display: block;
   width: 100%;
   height: 70px;
@@ -454,11 +486,13 @@ nav button.active span {
 .toggle-row input:checked::after {
   transform: translateX(19px);
 }
+/* Summary and actions */
 .panel-footer {
   flex-shrink: 0;
-  padding-top: 16px;
+  margin-top: 12px;
+  padding-top: 24px;
   border-top: 1px solid var(--line);
-  background: #f8f6f2;
+  background: var(--paper);
 }
 .summary {
   display: flex;
@@ -521,15 +555,16 @@ nav button.active span {
 .status:empty {
   display: none;
 }
+/* Page footer */
 footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
   min-height: 54px;
-  padding: 14px 42px;
+  padding: 14px var(--gutter);
   border-top: 1px solid var(--line);
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted);
 }
 footer b {
@@ -549,27 +584,7 @@ footer b {
   padding: 30px;
   color: var(--muted);
 }
-@media (min-width: 1700px) {
-  main {
-    grid-template-columns: minmax(0, 1fr) 510px;
-  }
-  aside {
-    padding: 42px 42px 22px;
-  }
-  .stage-heading {
-    left: 60px;
-    top: 45px;
-  }
-  .stage-heading h1 {
-    font-size: 86px;
-  }
-  .stage-bottom {
-    left: 60px;
-  }
-  .gesture {
-    left: 60px;
-  }
-}
+/* Responsive layouts: wide desktop, tablet, mobile, narrow mobile */
 @media (max-width: 1150px) and (min-width: 761px) {
   main {
     grid-template-columns: minmax(0, 1fr) 400px;
@@ -581,17 +596,16 @@ footer b {
     left: 28px;
   }
   .stage-heading h1 {
-    font-size: 56px;
+    font-size: 52px;
   }
   .stage-bottom {
-    left: 28px;
-    right: 24px;
+    width: calc(100% - 56px);
   }
   .stage-bottom strong {
     font-size: 20px;
   }
   .gesture {
-    left: 28px;
+    width: calc(100% - 56px);
   }
   .swatches {
     gap: 9px;
@@ -606,7 +620,7 @@ footer b {
     right: 25px;
   }
   .scene {
-    inset: 145px -30px 100px;
+    inset: 130px -30px 150px;
   }
   nav {
     gap: 12px;
@@ -622,7 +636,7 @@ footer b {
     gap: 20px;
   }
   .wordmark {
-    font-size: 32px;
+    font-size: 38px;
   }
   .header-caption {
     display: none;
@@ -633,7 +647,6 @@ footer b {
   main {
     display: flex;
     flex-direction: column;
-    height: auto;
     min-height: 0;
   }
   .stage {
@@ -645,11 +658,11 @@ footer b {
     left: 24px;
   }
   .eyebrow {
-    font-size: 11px;
-    letter-spacing: 1.4px;
+    font-size: 12px;
+    letter-spacing: 0.8px;
   }
   .stage-heading h1 {
-    font-size: 56px;
+    font-size: 52px;
     margin: 12px 0 9px;
   }
   .stage-heading p {
@@ -661,13 +674,13 @@ footer b {
     font-size: 12px;
   }
   .scene {
-    inset: 137px -15px 95px;
+    inset: 130px -15px 125px;
     touch-action: none;
   }
   .stage-bottom {
-    left: 24px;
-    right: 24px;
-    bottom: 52px;
+    width: calc(100% - 48px);
+    bottom: 55px;
+    padding-top: 15px;
     gap: 12px;
   }
   .stage-bottom strong {
@@ -677,7 +690,7 @@ footer b {
     font-size: 14px;
   }
   .stage-bottom div > span {
-    font-size: 11px;
+    font-size: 12px;
   }
   .view-tools {
     gap: 7px;
@@ -687,9 +700,9 @@ footer b {
     height: 44px;
   }
   .gesture {
-    bottom: 14px;
-    left: 24px;
-    font-size: 11px;
+    bottom: 20px;
+    width: calc(100% - 48px);
+    font-size: 12px;
   }
   aside {
     height: auto;
@@ -699,7 +712,7 @@ footer b {
     border-top: 1px solid var(--line);
   }
   .panel-intro h2 {
-    font-size: 40px;
+    font-size: 28px;
   }
   .panel-intro p {
     font-size: 15px;
@@ -713,8 +726,6 @@ footer b {
     min-height: 45px;
   }
   .options {
-    overflow: visible;
-    min-height: 310px;
     padding: 28px 0;
   }
   .choice-grid {
@@ -783,16 +794,17 @@ footer b {
   header {
     padding: 0 18px;
   }
-  .stage-heading,
-  .gesture {
+  .stage-heading {
     left: 20px;
+  }
+  .gesture {
+    width: calc(100% - 40px);
   }
   .stage-heading h1 {
-    font-size: 50px;
+    font-size: 48px;
   }
   .stage-bottom {
-    left: 20px;
-    right: 20px;
+    width: calc(100% - 40px);
   }
   .stage-bottom strong {
     font-size: 18px;
@@ -824,17 +836,9 @@ footer b {
     font-size: 13px;
   }
 }
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
     transition: none !important;
   }
-}
-.swatches button {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-}
-.swatches i {
-  flex-shrink: 0;
 }
