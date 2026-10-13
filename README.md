@@ -51,7 +51,7 @@ Tout s’exécute dans le navigateur. Aucun backend, compte utilisateur, secret 
 
 Adresse de publication attendue : **https://rmdevdesign.github.io/RMDev_Showroom/**. Une configuration de domaine personnalisé peut remplacer cette adresse.
 
-Le déploiement est manuel : un push seul ne publie pas le site. Relancer le workflow après une mise à jour à publier.
+Chaque push sur `main` déclenche la vérification, la compilation et la publication du site. Le workflow peut aussi être relancé manuellement depuis **Actions**.
 
 ## Fonctionnalités
 
